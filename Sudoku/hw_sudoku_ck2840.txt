@@ -1,0 +1,42 @@
+AC3 Implementation:
+
+Using AC3 I could solve 1, 2, and 332 puzzles from sudokus_start.txt
+003020600900305001001806400008102900700000008006708200002609500800203009005010300
+000260701680070090190004500820100040004602900050003028009300074040050036703018000
+000001000020000008691200000000000014102506003800020506005000000730000000006319405
+
+The above said 3 puzzles could be solved by AC3 in less than 0.5 seconds.
+This behavior is expected and is as mentioned in class. By checking consistency of arcs using AC3
+the domains of variables were adjusted and in the above 3 cases the domain size of each variable got
+reduced to a single value and hence could be solved.
+
+Backtrack Algorithm Implementation:
+
+1) Step 1 - Backtrack Algorithm with MRV:
+   Initially I implemented version of Backtrack algorithm without
+   Forward Checking. It was able to solve all the puzzles but it took more
+   time.
+   worst case - 3 minutes to solve.
+   overall time for 400 cases - 15 minutes.
+2) Step 2 - Added AC3 as preprocessor to the above step:
+   worst case - 2.5 minutes to solve.
+   overall time for 400 cases - 10 minutes.
+3) Step 3 - Backtrack algorithm with MRV and Forward checking (with AC3 as preprocessor):
+   worst case time - 4 seconds
+   best case time - 0.3 seconds
+   overall run time to solve 400 cases - 3 minutes
+
+Details:
+
+My driver_3.py implements Backtrack algorithm with MRV and Forward checking, with AC3 as preprocessor.
+
+Observations:
+
+Just by checking consistency of arcs using AC3 - I was able to solve the above mentioned 3 puzzles.
+
+Then by implementing Backtrack algorithm with MRV and Forward Checking - I could solve all the puzzles present in
+sudokus_start.txt.
+
+MRV heuristic played the role selecting the variable with lesser domain values, this was useful as we could fix
+values with lesser assignments. Once the value is assigned to the variable, forward checking does a good job in
+reducing the domain of its neighbors.
